@@ -60,6 +60,16 @@ export const PROJECTS = [
     highlights: ['Simple algorithm with state', 'Clean, centered UI']
   },
   {
+    title: 'DevFolio – Professional Portfolio (Bootstrap)',
+    year: '2024',
+    stack: ['HTML5', 'CSS3', 'JavaScript ES6+', 'Bootstrap 5'],
+    summary: 'Comprehensive portfolio template with animated typing, modal gallery, carousel, form validation, and multi-page structure.',
+    live: 'https://dev-kyrillos.github.io/Devfolio/',
+    repo: '',
+    cover: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1400&auto=format&fit=crop',
+    highlights: ['Bootstrap 5 components', 'Modal gallery with carousel', 'Animated typing effect']
+  },
+  {
     title: 'Mealify – Restaurant Landing (Pure CSS)',
     year: '2024',
     stack: ['HTML5', 'CSS3 (Flexbox / Grid)'],
