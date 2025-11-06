@@ -22,27 +22,36 @@ export default function Contact(){
       // 3. Copy your form endpoint URL (format: https://formspree.io/f/YOUR_FORM_ID)
       // 4. Replace the URL below with your own endpoint
       // Alternative: You can also use EmailJS (https://www.emailjs.com/)
+      
+      // Try sending as form-data (Formspree prefers this)
+      const formDataToSend = new URLSearchParams()
+      formDataToSend.append('name', name)
+      formDataToSend.append('email', email)
+      formDataToSend.append('message', message)
+      formDataToSend.append('_subject', `Portfolio Contact from ${name}`)
+      
       const response = await fetch('https://formspree.io/f/xjvwgqpn', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify({
-          name,
-          email,
-          message,
-          _subject: `Portfolio Contact from ${name}`,
-        }),
+        body: formDataToSend,
       })
+      
+      const data = await response.json()
       
       if (response.ok) {
         setStatus('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً.')
         e.currentTarget.reset()
       } else {
-        throw new Error('Failed to send')
+        // Show more specific error message
+        const errorMsg = data.error || data.message || 'Failed to send'
+        console.error('Formspree error:', errorMsg, data)
+        throw new Error(errorMsg)
       }
     } catch (error) {
-      setStatus('حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى أو التواصل معي مباشرة.')
+      console.error('Contact form error:', error)
+      setStatus('حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى أو التواصل معي مباشرة على dev.kyrollies@gmail.com')
     } finally {
       setLoading(false)
     }
